@@ -1,0 +1,11 @@
+{
+  "name": "RawPixelWS",
+  "version": "1.0.0",
+  "description": "Rohes, ungebremstes Pixel-WebSocket (RGBW, alle Segmente) für WLED - niedrige Latenz, keine JSON-Kodierung, kein Downsampling.",
+  "keywords": ["wled", "usermod", "websocket", "rgbw", "realtime"],
+  "frameworks": "arduino",
+  "platforms": ["espressif32", "espressif8266"],
+  "build": {
+    "libArchive": false
+  }
+}
