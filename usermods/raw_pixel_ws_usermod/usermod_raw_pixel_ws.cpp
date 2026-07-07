@@ -57,7 +57,7 @@
 
 class RawPixelWsUsermod : public Usermod {
   private:
-    AsyncWebSocket wsRaw = AsyncWebSocket("/rawws");
+    AsyncWebSocket wsRaw;          // im Konstruktor initialisiert (Kopier-Konstruktor ist gelöscht)
     uint32_t lastFrameSent = 0;   // letzter strip.now Wert, der bereits verschickt wurde
     bool enabled = true;          // per Usermod-Settings umschaltbar
     bool onlyMainSegment = false; // optional: nur Hauptsegment statt gesamten Framebuffer senden
@@ -119,6 +119,8 @@ class RawPixelWsUsermod : public Usermod {
     }
 
   public:
+    RawPixelWsUsermod() : wsRaw("/rawws") {}
+
     void setup() override {
       wsRaw.onEvent([](AsyncWebSocket *server, AsyncWebSocketClient *client,
                         AwsEventType type, void *arg, uint8_t *data, size_t len) {
