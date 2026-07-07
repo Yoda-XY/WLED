@@ -128,6 +128,9 @@ class RawPixelWsUsermod : public Usermod {
         // Bei Bedarf könnte man hier z.B. {"lv":true}-ähnliche Steuerbefehle parsen.
         if (type == WS_EVT_CONNECT) {
           DEBUG_PRINTF_P(PSTR("RawPixelWS: client #%u connected\n"), client->id());
+          // Nagle/verzoegerte ACKs koennen auf WLAN-Verbindungen ~100ms Bursts erzeugen -
+          // TCP_NODELAY schaltet das ab, damit Pakete sofort raus gehen statt gesammelt zu werden.
+          if (client->client()) client->client()->setNoDelay(true);
         }
       });
       server.addHandler(&wsRaw);
